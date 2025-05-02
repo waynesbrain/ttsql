@@ -1,0 +1,39 @@
+{
+  "folders": [
+    {
+      "name": "ttsql",
+      "path": "./"
+    },
+  ],
+  // Settings to apply when VS Code is started with this `.code-workspace`
+  // file. Each of the workspace folders above can also have their own
+  // settings in a `.vscode/` subdirectory. Those settings are applied
+  // whether VS Code started with this `code-workspace` file OR if VS Code
+  // opened the subdirectory directly.
+  "settings": {
+    "editor.formatOnSave": true,
+    "explorer.fileNesting.patterns": {
+      "*.astro": "${capture}.*",
+      "*.cjs": "${capture}.*",
+      "*.cts": "${capture}.*",
+      "*.css": "${capture}.*.css",
+      ".env": ".env.*",
+      "*.js": "${capture}.*",
+      "*.json": "${capture}.*",
+      "*.jsx": "${capture}.*",
+      "*.mdx": "${capture}.*",
+      "*.ts": "${capture}.*",
+      "*.tsx": "${capture}.*",
+      "tsconfig.json": "tsconfig.*.json",
+      "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
+      "wrangler.jsonc": "*.dev.vars"
+    },
+    "files.associations": {
+      "*.vars": "shellscript"
+    },
+    "search.exclude": {
+      "package-lock.json": true,
+      "dist/**/*": true,
+    },
+  },
+}
