@@ -37,7 +37,7 @@
     "proseWrap": "always"
   },
   "peerDependencies": {
-    "@sinclair/typebox": "^0.30.0"
+    "@sinclair/typebox": "*"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250430.0",
