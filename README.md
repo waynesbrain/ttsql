@@ -54,7 +54,7 @@ const { query, values } = db.get(({ $ }) => sql`SELECT * FROM ${$.posts}`);
 console.log(query); // 'SELECT * FROM "posts"'
 console.log(values); // ["a2z"]
 
-const { query, values } = db.get(({ p }) => sql`SELECT * FROM ${$.p}`);
+const { query, values } = db.get(({ p }) => sql`SELECT * FROM ${p}`);
 console.log(query); // 'SELECT * FROM "posts" as "p"'
 console.log(values); // ["a2z"]
 
