@@ -1,17 +1,47 @@
-# lib/sql
+# ttsql
 
 A composable, type-safe, schema-based SQL tagged-template query builder created
-with TypeScript.
+with TypeScript allowing you to do more with templates like this:
+
+``sql`SELECT * FROM ${tbl} WHERE ${tbl.id} = ${id}`;``
+
+## Status
+
+- High quality, tested but still in `alpha`.
+- Targets SQLite initially.
+- No "dialects" system yet.
+- Developed for SQLite on Cloudflare D1.
+
+## Features
+
+- **Tagged Template SQL Builder**: Provides a `sql` tagged template function for
+  safe, composable, and parameterized SQL queries.
+- **Type References**: Allows easy, autocompleted access to reference database
+  table and field schemas.
+- **Composable SQL Fragments**: Supports dynamic composition of SQL fragments.
+- **Automatic Parameter Binding**: Automatically handles parameter binding and
+  placeholder substitution (`?`) for safe, injection-resistant queries.
+- **Nested and Dynamic Queries**: Allows embedding of SQL fragments and dynamic
+  conditions (including handling of `null` as `IS NULL` in SQL).
+- **Batch and Transaction Support**: Abstract base class supports batch
+  execution and transactions for multiple queries.
+- **Extensible Database Backends**: Designed for extension to different database
+  backends (e.g., D1/Cloudflare, with `D1Database` implementation).
+- **Schema-Driven Querying**: Leverages TypeBox JSON schemas for database
+  structure, enabling static analysis and code completion.
+- **Tested Usage Patterns**: Comprehensive tests demonstrate usage for SELECT,
+  UPDATE, JOINs, nested fragments, and dynamic conditions, ensuring robust query
+  construction.
 
 ## Quick start
 
 ```ts
-import { type Sql, sql } from "@/lib/sql";
-// Given MyDb, a record of TypeBox/JSON Schema objects describing our tables.
+import { type Sql, sql } from "ttsql";
+// Given MyDb, a record of TypeBox/JSON Schemas describing our tables.
 import { MyDb } from "./my/db";
 // e.g.  MyDb = { posts: Type.Object({ ... }), users, ... };
 
-/** Make .$ reference tables/fields from MyDb and build common table aliases. */
+/** Make .$ reference our tables/fields and build common table aliases. */
 const myDbRef = sql.refs(MyDb, { p: "posts", u: "users" });
 const db = new MainDatabase();
 
@@ -100,27 +130,6 @@ validation (`schemas`) for the `sql` tagged-template builder which embeds these
 as references like this:
 
 ``sql`SELECT * FROM ${tbl} WHERE ${tbl.id} = ${id}`;``
-
-## Features
-
-- **Tagged Template SQL Builder**: Provides a `sql` tagged template function for
-  safe, composable, and parameterized SQL queries.
-- **Type References**: Allows easy, autocompleted access to reference database
-  table and field schemas.
-- **Composable SQL Fragments**: Supports dynamic composition of SQL fragments.
-- **Automatic Parameter Binding**: Automatically handles parameter binding and
-  placeholder substitution (`?`) for safe, injection-resistant queries.
-- **Nested and Dynamic Queries**: Allows embedding of SQL fragments and dynamic
-  conditions (including handling of `null` as `IS NULL` in SQL).
-- **Batch and Transaction Support**: Abstract base class supports batch
-  execution and transactions for multiple queries.
-- **Extensible Database Backends**: Designed for extension to different database
-  backends (e.g., D1/Cloudflare, with `DatabaseD1` implementation).
-- **Schema-Driven Querying**: Leverages TypeBox JSON schemas for database
-  structure, enabling static analysis and code completion.
-- **Tested Usage Patterns**: Comprehensive tests demonstrate usage for SELECT,
-  UPDATE, JOINs, nested fragments, and dynamic conditions, ensuring robust query
-  construction.
 
 ## Roadmap
 
