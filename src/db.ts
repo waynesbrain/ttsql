@@ -176,7 +176,9 @@ export abstract class SqlDatabase<DB, A = unknown> {
     const parseKeys: string[] = [];
     const { properties } = schema;
     for (const key in properties) {
-      const type = (properties[key] as TAnySchema).type;
+      const type =
+        (properties[key] as TAnySchema).type ??
+        (properties[key] as TAnySchema).anyOf?.[0]?.type;
       switch (type) {
         case "boolean":
         case "number":
