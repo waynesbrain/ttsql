@@ -18,11 +18,12 @@ export class SqlError extends Error {
     this.query = query;
     this.values = values;
   }
-  report() {
-    return this.toString() + `\nof ${JSON.stringify(this.values)}`;
-  }
   toString() {
     return `${this.message}\nin ( ${this.query} )`;
+  }
+  /** Returns a full summary of the error with details. */
+  toSummary() {
+    return this.toString() + `\nof ${JSON.stringify(this.values)}`;
   }
 }
 
