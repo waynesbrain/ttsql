@@ -182,7 +182,8 @@ sql.matches = function sqlMatches(...entries) {
       // Process tuple same as we would a single key in an object entry.
       let code = i > 0 ? " AND " : "";
       const key = entry[0];
-      const value = entry[1];
+      // Coerce undefined to null value.
+      const value = entry[1] ?? null;
       let name = key;
       if (isSqlRef(key)) {
         const ref = key[SqlRef];
@@ -203,7 +204,8 @@ sql.matches = function sqlMatches(...entries) {
       // Process object.
       for (const key in entry) {
         let code = i > 0 ? " AND " : "";
-        const value = entry[key];
+        // Coerce undefined to null value.
+        const value = entry[key] ?? null;
         const name = key.includes(".") ? key.replaceAll(".", '"."') : key;
         // TODO: Escape characters in identifier name...
         if (value === null) {
@@ -234,7 +236,8 @@ sql.assign = function sqlAssign(...entries) {
       // Process tuple same as we would a single key in an object entry.
       let code = i > 0 ? ", " : "";
       const key = entry[0];
-      const value = entry[1];
+      // Coerce undefined to null value.
+      const value = entry[1] ?? null;
       const name = isSqlRef(key) ? key[SqlRef].name : (key as string);
       // TODO: Escape characters in identifier name...
       if (value === null) {
@@ -249,7 +252,8 @@ sql.assign = function sqlAssign(...entries) {
       // Process object.
       for (const key in entry) {
         let code = i > 0 ? ", " : "";
-        const value = entry[key];
+        // Coerce undefined to null value.
+        const value = entry[key] ?? null;
         const name = key;
         // TODO: Escape characters in identifier name...
         if (value === null) {
