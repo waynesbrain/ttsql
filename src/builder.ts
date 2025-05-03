@@ -47,7 +47,12 @@ function buildSql(sources: ReadonlyArray<string>, ...params: unknown[]): Sql {
       params[i] = param[0];
       if (param.length > 1) {
         // Insert the rest of the elements after the current position.
-        params.splice(i + 1, 0, ...param.slice(1));
+        params.splice(
+          i + 1,
+          0,
+          // Map undefined array elements to null. No conditional SQL in lists.
+          ...param.slice(1).map((it) => (it === undefined ? null : it)),
+        );
         // Update the length to account for the newly added elements
         length += param.length - 1;
         // Add comma separators to the codes array for each additional element
