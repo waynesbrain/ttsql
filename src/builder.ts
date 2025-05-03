@@ -150,6 +150,9 @@ sql.concat = function sqlConcat(...items) {
 };
 
 sql.matches = function sqlMatches(...entries) {
+  if (entries.length === 0) {
+    return undefined;
+  }
   const codes: string[] = [];
   const values: any[] = [];
   let i = 0;
