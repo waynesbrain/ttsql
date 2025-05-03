@@ -1,4 +1,4 @@
-import type { D1Database } from "@cloudflare/workers-types";
+import type { D1Database, D1ExecResult } from "@cloudflare/workers-types";
 // Local
 import { type SqlResult, SqlDatabase } from "./db";
 import type { Sql } from "./types";
@@ -15,8 +15,8 @@ export class DatabaseD1<DB, A = unknown> extends SqlDatabase<DB, A> {
    * > Only use this method for maintenance and one-shot tasks e.g. migrations.
    * - https://developers.cloudflare.com/d1/worker-api/d1-database/#guidance-2
    */
-  async bulk(sql: string): Promise<void> {
-    await this.db.exec(sql);
+  async bulk(sql: string): Promise<D1ExecResult> {
+    return this.db.exec(sql);
   }
 
   protected async first(cmd: Sql): Promise<Record<string, unknown> | null> {
