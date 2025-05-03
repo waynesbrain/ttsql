@@ -28,6 +28,7 @@
     "lint": "eslint -c ./eslint.config.js --max-warnings 0 ./src/",
     "lint-ts": "tsc --noEmit --pretty --project ./tsconfig.json  --skipLibCheck",
     "lint-ts-watch": "npm run lint-ts -- --watch",
+    "prepublishOnly": "npm run build",
     "start": "vite build --watch",
     "test": "vitest run",
     "test-watch": "vitest"
