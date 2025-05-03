@@ -18,7 +18,8 @@ export class DatabaseD1<DB, A = unknown> extends SqlDatabase<DB, A> {
    */
   async bulk(rawSql: string): Promise<D1ExecResult> {
     try {
-      return this.db.exec(rawSql);
+      const result = await this.db.exec(rawSql);
+      return result;
     } catch (err: any) {
       throw new SqlError(err, sql([rawSql]));
     }
@@ -31,7 +32,8 @@ export class DatabaseD1<DB, A = unknown> extends SqlDatabase<DB, A> {
       prepared = prepared.bind(...values);
     }
     try {
-      return prepared.first();
+      const item = await prepared.first();
+      return item;
     } catch (err: any) {
       throw new SqlError(err, cmd);
     }
@@ -44,7 +46,8 @@ export class DatabaseD1<DB, A = unknown> extends SqlDatabase<DB, A> {
       prepared = prepared.bind(...values);
     }
     try {
-      return prepared.run();
+      const result = await prepared.run();
+      return result;
     } catch (err: any) {
       throw new SqlError(err, cmd);
     }
@@ -61,7 +64,8 @@ export class DatabaseD1<DB, A = unknown> extends SqlDatabase<DB, A> {
       return prepared;
     });
     try {
-      return this.db.batch(statements);
+      const result = await this.db.batch(statements);
+      return result;
     } catch (err: any) {
       throw new SqlError(err, cmds[0]);
     }
