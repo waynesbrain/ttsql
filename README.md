@@ -131,6 +131,10 @@ as references like this:
 
 ``sql`SELECT * FROM ${tbl} WHERE ${tbl.id} = ${id}`;``
 
+So far while dog-fooding `ttsql` any issues that I've run into with bad SQL
+being produced have been solved far more quickly than the TypeScript type issues
+that I've spent days on with other kits.
+
 ## Roadmap
 
 Things to keep in mind for expanding....
