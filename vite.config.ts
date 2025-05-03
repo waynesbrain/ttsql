@@ -1,6 +1,11 @@
+import { readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { defineConfig } from "vite";
 import typescript from "@rollup/plugin-typescript";
+
+const input = readdirSync(resolve(__dirname, "./src"))
+  .filter((path) => path.endsWith(".ts"))
+  .map((it) => resolve(__dirname, "src", it));
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -11,9 +16,15 @@ export default defineConfig({
       entry: resolve(__dirname, "./src/index.ts"),
       name: "ttsql",
       formats: ["es"],
-      fileName: "index",
+      fileName: (_format, entryName) => `${entryName}.js`,
     },
     rollupOptions: {
+      input,
+      // input: [
+      //   resolve(__dirname, "./src/index.ts"),
+      //   resolve(__dirname, "./src/d1.ts"),
+      //   resolve(__dirname, "./src/db.ts"),
+      // ],
       external: ["@sinclair/typebox"],
       // output: {
       //   globals: {
