@@ -179,6 +179,7 @@ sql.matches = function sqlMatches(...entries) {
       values.push(entry);
       i += 1;
     } else if (Array.isArray(entry)) {
+      throwIfNotEntryTuple(2, entry, "sql.matches");
       // Process tuple same as we would a single key in an object entry.
       let code = i > 0 ? " AND " : "";
       const key = entry[0];
@@ -233,6 +234,7 @@ sql.assign = function sqlAssign(...entries) {
       values.push(entry);
       i += 1;
     } else if (Array.isArray(entry)) {
+      throwIfNotEntryTuple(2, entry, "sql.assign");
       // Process tuple same as we would a single key in an object entry.
       let code = i > 0 ? ", " : "";
       const key = entry[0];
@@ -285,3 +287,17 @@ sql.where = function sqlWhere(...matches) {
   }
   return result;
 };
+
+function throwIfNotEntryTuple(
+  maxElements: number,
+  entry: unknown[],
+  method?: string,
+) {
+  if (entry.length > maxElements) {
+    throw new Error(
+      `Arrays may NOT be passed${method ? "to " + method : ""}, ` +
+        "only tuples of the appropriate size. " +
+        "Perhaps you meant to spread the entries.",
+    );
+  }
+}
