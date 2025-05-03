@@ -1,7 +1,7 @@
 {
   "name": "ttsql",
   "version": "0.1.0",
-  "description": "A composable, type-safe, schema-based SQL tagged-template query builder created with TypeScript.",
+  "description": "A composable, schema-based SQL tagged-template query builder created with TypeScript.",
   "license": "MIT",
   "author": {
     "name": "Waynesbrain",

@@ -1,7 +1,7 @@
 # ttsql
 
-A composable, type-safe, schema-based SQL tagged-template query builder created
-with TypeScript allowing you to do more with templates like this:
+A composable, schema-based SQL tagged-template query builder created with
+TypeScript allowing you to do more with templates like this:
 
 ``sql`SELECT * FROM ${tbl} WHERE ${tbl.id} = ${id}`;``
 
@@ -15,12 +15,12 @@ with TypeScript allowing you to do more with templates like this:
 ## Features
 
 - **Tagged Template SQL Builder**: Provides a `sql` tagged template function for
-  safe, composable, and parameterized SQL queries.
+  composable, and parameterized SQL queries.
 - **Type References**: Allows easy, autocompleted access to reference database
   table and field schemas.
 - **Composable SQL Fragments**: Supports dynamic composition of SQL fragments.
 - **Automatic Parameter Binding**: Automatically handles parameter binding and
-  placeholder substitution (`?`) for safe, injection-resistant queries.
+  placeholder substitution (`?`) for sql-injection safe queries.
 - **Nested and Dynamic Queries**: Allows embedding of SQL fragments and dynamic
   conditions (including handling of `null` as `IS NULL` in SQL).
 - **Batch and Transaction Support**: Abstract base class supports batch
