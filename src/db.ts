@@ -7,6 +7,25 @@ import {
 // Local
 import { type Sql, type SqlDbRefs, type StaticIn, dbRefs } from "./types";
 
+// Custom error for SQL operations
+export class SqlError extends Error {
+  command: Sql;
+  constructor(error: any, command: Sql) {
+    super(error + "", { cause: error });
+    this.name = "SqlError";
+    this.command = command;
+  }
+  toString() {
+    const { query, values } = this.command;
+    return (
+      `${this.name}: ${this.message}\n` +
+      `in ( ${query} )\n` +
+      `of ${JSON.stringify(values)}\n` +
+      this.stack
+    );
+  }
+}
+
 /** Similar to {@link D1Response} for now. */
 export interface SqlResponse {
   success: true;
