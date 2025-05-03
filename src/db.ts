@@ -9,18 +9,20 @@ import { type Sql, type SqlDbRefs, type StaticIn, dbRefs } from "./types";
 
 // Custom error for SQL operations
 export class SqlError extends Error {
-  command: Sql;
+  readonly query: Sql["query"];
+  readonly values: Sql["values"];
   constructor(error: any, command: Sql) {
     super(error + "", { cause: error });
     this.name = "SqlError";
-    this.command = command;
+    const { query, values } = command;
+    this.query = query;
+    this.values = values;
   }
   toString() {
-    const { query, values } = this.command;
     return (
       `${this.name}: ${this.message}\n` +
-      `in ( ${query} )\n` +
-      `of ${JSON.stringify(values)}\n` +
+      `in ( ${this.query} )\n` +
+      `of ${JSON.stringify(this.values)}\n` +
       this.stack
     );
   }
