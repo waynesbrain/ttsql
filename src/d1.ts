@@ -77,7 +77,7 @@ export class DatabaseD1<DB, A = unknown> extends SqlDatabase<DB, A> {
     if (!queryCache) {
       prepared = db.prepare(query);
     } else {
-      prepared = queryCache.get(query);
+      prepared = queryCache.get(query)!;
       if (!prepared) {
         prepared = db.prepare(query);
       }
