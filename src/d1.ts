@@ -19,7 +19,7 @@ import type { Sql } from "./types";
  * for caching prepared statements by query.
  */
 export interface DatabaseD1QueryCache {
-  get(query: string): D1PreparedStatement;
+  get(query: string): D1PreparedStatement | undefined;
   set(query: string, statement: D1PreparedStatement): any;
 }
 // CONSIDER: Add has(query: string):boolean; to DatabaseD1QueryCache if needed.
