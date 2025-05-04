@@ -42,6 +42,15 @@ export interface SqlResult<T = unknown> extends SqlResponse {
   results: T[];
 }
 
+export interface SqlDatabaseConfig<DB, A = unknown> {
+  /** Common table aliases. */
+  aliases?: A;
+  /** References already generated from {@link dbRefs} */
+  refs?: SqlDbRefs<DB, A>;
+  /** TypeBox JSON schemas for database tables. */
+  schema: DB;
+}
+
 export abstract class SqlDatabase<DB, A = unknown> {
   /** Common table aliases. */
   readonly aliases: A | undefined;
@@ -50,7 +59,8 @@ export abstract class SqlDatabase<DB, A = unknown> {
   /** TypeBox JSON schemas for database tables. */
   readonly schema: DB;
 
-  constructor(schema: DB, aliases?: A, refs?: SqlDbRefs<DB, A>) {
+  constructor(config: SqlDatabaseConfig<DB, A>) {
+    const { schema, aliases, refs } = config;
     this.schema = schema;
     this.aliases = aliases;
     this.refs =

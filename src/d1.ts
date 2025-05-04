@@ -1,14 +1,25 @@
 import type { D1Database, D1ExecResult } from "@cloudflare/workers-types";
 // Local
 import { sql } from "./builder";
-import { type SqlResult, SqlDatabase, SqlError } from "./db";
+import {
+  type SqlDatabaseConfig,
+  type SqlResult,
+  SqlDatabase,
+  SqlError,
+} from "./db";
 import type { Sql } from "./types";
+
+export interface DatabaseD1Config<DB, A = unknown>
+  extends SqlDatabaseConfig<DB, A> {
+  binding: D1Database;
+}
 
 export class DatabaseD1<DB, A = unknown> extends SqlDatabase<DB, A> {
   protected db: D1Database;
 
-  constructor(db: D1Database, schema: DB, aliases?: A) {
-    super(schema, aliases);
+  constructor(config: DatabaseD1Config<DB, A>) {
+    super(config);
+    const { binding: db } = config;
     this.db = db;
   }
   /**
