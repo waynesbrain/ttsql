@@ -23,6 +23,6 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"],
+  "include": ["./src/d1.ts", "./src/db.ts", "./src/index.ts"],
   "exclude": ["./src/test/"]
 }
