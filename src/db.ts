@@ -45,6 +45,8 @@ export interface SqlResult<T = unknown> extends SqlResponse {
 export interface SqlDatabaseConfig<DB, A = unknown> {
   /** Common table aliases. */
   aliases?: A;
+  /** Function to get the schema referenced by `schema.$ref`. */
+  deref?: (schema: TSchema) => TSchema;
   /** References already generated from {@link dbRefs} */
   refs?: SqlDbRefs<DB, A>;
   /** TypeBox JSON schemas for database tables. */
@@ -53,7 +55,9 @@ export interface SqlDatabaseConfig<DB, A = unknown> {
 
 export abstract class SqlDatabase<DB, A = unknown> {
   /** Common table aliases. */
-  readonly aliases: A | undefined;
+  readonly aliases?: A;
+  /** Function to get the schema referenced by `schema.$ref`. */
+  readonly deref?: (schema: TSchema) => TSchema;
   /** References for use in `sql`. */
   readonly refs: SqlDbRefs<DB, A>;
   /** TypeBox JSON schemas for database tables. */
@@ -202,7 +206,14 @@ export abstract class SqlDatabase<DB, A = unknown> {
 
   /** Given a table schema, parses JSON from results. */
   protected parseResults<T>(results: T[], schema?: TAnySchema): T[] {
-    if (!schema || schema.type !== "object") return results;
+    if (!schema) return results;
+    if (schema.type !== "object") {
+      if (!schema.$ref) return results;
+      const { deref } = this;
+      if (!deref) return results;
+      schema = deref(schema);
+      if (schema?.type !== "object") return results;
+    }
     const parseKeys: string[] = [];
     const { properties } = schema;
     for (const key in properties) {
