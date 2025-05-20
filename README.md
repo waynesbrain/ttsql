@@ -9,6 +9,9 @@ TypeScript allowing you to do more with templates like this:
 
 ### Deprecated: Use Drizzle
 
+See
+[My Drizzle Story: How I wasted a week for lack of reading](https://github.com/drizzle-team/drizzle-orm/discussions/4540)
+
 - High quality, tested but still _(and now forever)_ in `alpha`.
 - Targets SQLite initially.
 - No "dialects" system yet.
