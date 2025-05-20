@@ -7,7 +7,9 @@ TypeScript allowing you to do more with templates like this:
 
 ## Status
 
-- High quality, tested but still in `alpha`.
+### Deprecated: Use Drizzle
+
+- High quality, tested but still _(and now forever)_ in `alpha`.
 - Targets SQLite initially.
 - No "dialects" system yet.
 - Developed for SQLite on Cloudflare D1.
@@ -109,7 +111,7 @@ type MyDbRef = typeof myDbRef;
 ## Why though?
 
 The amount of work done to satiate the type systems of classical object/type
-based ORMs and query builders like [Drizzle](https://orm.drizzle.team/) and
+based ORMs and query builders like ~~[Drizzle](https://orm.drizzle.team/)~~ and
 [Kysely](https://kysely.dev) got annoying. Before that, when using Sequelize,
 Knex or Objection the drawbacks of mainting their bulk outweighed the benefits,
 particularly for such _advanced_ scenarios as dynamic queries... _(/s)_
@@ -137,12 +139,14 @@ that I've spent days on with other kits.
 
 ## Roadmap
 
-Things to keep in mind for expanding....
+Deprecate this library and switch to Drizzle.
 
-- Aggregation functions - Support for COUNT, SUM, etc.
-- Subquery support - More complex nesting than what's shown in tests.
-- Pagination utilities - LIMIT/OFFSET helpers.
-- Batch operations - Using D1 binding batch or D1 API.
+~~Things to keep in mind for expanding....~~
+
+- ~~Aggregation functions - Support for COUNT, SUM, etc.~~
+- ~~Subquery support - More complex nesting than what's shown in tests.~~
+- ~~Pagination utilities - LIMIT/OFFSET helpers.~~
+- ~~Batch operations - Using D1 binding batch or D1 API.~~
 
 ## Similar libraries
 
